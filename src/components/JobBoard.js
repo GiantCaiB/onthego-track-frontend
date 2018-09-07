@@ -1,3 +1,4 @@
+import "../css/style.css";
 import React from "react";
 import { connect } from "react-redux";
 
@@ -16,47 +17,93 @@ class JobBoard extends React.Component {
     const { jobs } = this.props;
     const columns = [
       {
-        Header: "Job ID",
+        Header: "ID",
         accessor: "jobID",
-        width: 100
+        width: 40
       },
       {
         Header: "Store",
         accessor: "store",
-        width: 100
+        width: 50
       },
       {
         Header: "Customer Name",
         accessor: "customername",
-        maxWidth: 200
+        maxWidth: 100
       },
       {
         Header: "Contact",
         accessor: "contact",
-        maxWidth: 200
+        maxWidth: 100
       },
       {
         Header: "Device",
         accessor: "deviceDesc",
-        maxWidth: 200
+        maxWidth: 100
       },
       {
         Header: "Issue",
         accessor: "issueDesc",
-        minWidth: 300
+        maxWidth: 150
+      },
+      {
+        Header: "Accessories",
+        accessor: "accessories",
+        maxWidth: 80
       },
       {
         Header: "Receiver",
         accessor: "receivedStaff",
-        maxWidth: 200
+        maxWidth: 80
       },
       {
         Header: "Received Date",
         accessor: "receivedDate",
-        maxWidth: 200
+        maxWidth: 100
+      },
+      {
+        Header: "Quoted By",
+        accessor: "quoteStaff",
+        width: 80
+      },
+      {
+        Header: "Quoted Price",
+        accessor: "quoteDate",
+        width: 90
+      },
+      {
+        Header: "Instore?",
+        accessor: "instore",
+        width: 70
+      },
+      {
+        Header: "Confirmed?",
+        accessor: "confirmed",
+        width: 80
+      },
+      {
+        Header: "Fixed?",
+        accessor: "fixed",
+        width: 50
+      },
+      {
+        Header: "Fullfilled By",
+        accessor: "fullfilledStaff",
+        width: 80
+      },
+      {
+        Header: "Fullfilled Date",
+        accessor: "fullfilledDate",
+        width: 100
       }
     ];
-    return <ReactTable data={jobs} columns={columns} />;
+    return (
+      <div className="jobBoard">
+        <div className="grey lighten-5">
+          <ReactTable data={jobs} columns={columns} />
+        </div>
+      </div>
+    );
   }
 }
 

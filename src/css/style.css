@@ -11,3 +11,15 @@
 .form-control{
     color: #E8E8E8;
 }
+
+.homeBoard{
+    font-family: 'Contrail One';
+}
+
+.homeBoard h3{
+    color: #E8E8E8;
+}
+
+.jobBoard{
+    margin : auto -200% auto -200%;
+}

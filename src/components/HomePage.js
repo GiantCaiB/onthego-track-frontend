@@ -3,32 +3,33 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import {JobBoard} from "./JobBoard";
+import { JobBoard } from "./JobBoard";
 
 class HomePage extends React.Component {
-    componentDidMount() { }
+  componentDidMount() {}
 
-    render() {
-        const { user } = this.props;
-        return (
-            <div className="col-md-6 col-md-offset-3">
-                <h3>Hi {user.username}!</h3>
-                <JobBoard />                
-                <p>You're logged in now!</p>
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
-            </div>
-        );
-    }
+  render() {
+    const { user } = this.props;
+    return (
+      <div className="homeBoard">
+        <div className="col-md-6 col-md-offset-3">
+          <h3>Hi {user.username}!</h3>
+          <JobBoard />
+          <p>
+            <Link to="/login">Logout</Link>
+          </p>
+        </div>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    const { authentication } = state;
-    const { user } = authentication;
-    return {
-        user
-    };
+  const { authentication } = state;
+  const { user } = authentication;
+  return {
+    user
+  };
 }
 
 const connectedHomePage = connect(mapStateToProps)(HomePage);
