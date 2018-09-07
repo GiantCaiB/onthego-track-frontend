@@ -13,7 +13,7 @@ class HomePage extends React.Component {
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h3>Hi {user.username}!</h3>
-                <p> Admin: {user.admin.toString()}</p>
+                <JobBoard />                
                 <p>You're logged in now!</p>
                 <p>
                     <Link to="/login">Logout</Link>
