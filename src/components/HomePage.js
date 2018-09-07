@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { jobActions } from "../_actions";
 
-import { JobBoard } from "./JobBoard";
+import JobBoard from "./JobBoard";
 
 class HomePage extends React.Component {
     constructor(props) {
