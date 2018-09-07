@@ -7,10 +7,6 @@ import { jobActions } from "../_actions";
 import ReactTable from "react-table";
 
 class JobBoard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props.dispatch(jobActions.getAll());
-  }
 
   componentDidMount() {}
   render() {
