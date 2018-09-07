@@ -7,6 +7,7 @@ import { alertActions } from "../_actions";
 import { PrivateRoute } from "../_helpers/PrivateRoute";
 import { HomePage } from "./HomePage";
 import { LoginPage } from "./LoginPage";
+import { JobBoard } from "./JobBoard";
 
 class App extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
                         <Router history={history}>
                             <div>
                                 <PrivateRoute exact path="/" component={HomePage} />
+                                <PrivateRoute exact path="/Jobs" component={JobBoard} />
                                 <Route path="/login" component={LoginPage} />
                             </div>
                         </Router>
