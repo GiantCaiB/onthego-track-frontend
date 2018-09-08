@@ -16,10 +16,18 @@
     font-family: 'Contrail One';
 }
 
-.homeBoard h3{
+.homeBoard h4{
     color: #E8E8E8;
 }
 
+.homeBoard Button{
+    margin-right:40px;
+}
+
+.controlPanel{
+    margin : auto -102% auto -202%;
+}
+
 .jobBoard{
-    margin : auto -200% auto -200%;
+    margin : auto -202% auto -202%;
 }

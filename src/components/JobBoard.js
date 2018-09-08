@@ -44,7 +44,7 @@ class JobBoard extends React.Component {
       {
         Header: "Issue",
         accessor: "issueDesc",
-        maxWidth: 150
+        maxWidth: 200
       },
       {
         Header: "Accessories",
@@ -100,7 +100,7 @@ class JobBoard extends React.Component {
     return (
       <div className="jobBoard">
         <div className="grey lighten-5">
-          <ReactTable data={jobs} columns={columns} />
+          <ReactTable data={jobs} columns={columns} defaultPageSize="15"/>
         </div>
       </div>
     );
