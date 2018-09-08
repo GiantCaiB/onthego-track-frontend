@@ -8,10 +8,7 @@ import { jobActions } from "../_actions";
 import JobBoard from "./JobBoard";
 
 class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.props.dispatch(jobActions.getAll());
-      }
+
   componentDidMount() {}
 
   render() {
