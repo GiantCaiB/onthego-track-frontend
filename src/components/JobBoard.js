@@ -1,9 +1,16 @@
 import "../css/style.css";
 import React from "react";
+import { connect } from "react-redux";
+
+import { jobActions } from "../_actions";
 
 import ReactTable from "react-table";
 
 class JobBoard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.dispatch(jobActions.getAll());
+  }
 
   componentDidMount() {}
   render() {
@@ -100,4 +107,15 @@ class JobBoard extends React.Component {
   }
 }
 
-export default JobBoard;
+function mapStateToProps(state) {
+  const { jobsInfo, authentication } = state;
+  const { jobs } = jobsInfo;
+  const { user } = authentication;
+  return {
+    jobs,
+    user
+  };
+}
+
+const connectedJobBoard = connect(mapStateToProps)(JobBoard);
+export { connectedJobBoard as JobBoard };

@@ -20,7 +20,6 @@ class HomePage extends React.Component {
       <div className="homeBoard">
         <div className="col-md-6 col-md-offset-3">
           <h3>Hi {user.username}!</h3>
-          <JobBoard jobs={this.props.jobs} />
           <p>
             <Link to="/login">Logout</Link>
           </p>
@@ -31,12 +30,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication, jobsInfo } = state;
+  const { authentication } = state;
   const { user } = authentication;
-  const { jobs } = jobsInfo;
   return {
-    user,
-    jobs
+    user
   };
 }
 
