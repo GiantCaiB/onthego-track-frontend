@@ -27,74 +27,93 @@ class JobBoard extends React.Component {
         width: 50
       },
       {
-        Header: "Customer Name",
-        accessor: "customername",
-        maxWidth: 100
-      },
-      {
-        Header: "Contact",
-        accessor: "contact",
-        maxWidth: 100
+        Header: "Customer",
+        columns: [
+          {
+            Header: " Name",
+            accessor: "customername",
+          },
+          {
+            Header: "Contact",
+            accessor: "contact",
+          }
+        ]
       },
       {
         Header: "Device",
-        accessor: "deviceDesc",
-        maxWidth: 100
+        columns: [
+          {
+            Header: "Model",
+            accessor: "deviceDesc",
+          },
+          {
+            Header: "Issue",
+            accessor: "issueDesc",
+          },
+          {
+            Header: "Accessories",
+            accessor: "accessories",
+          }
+        ]
       },
       {
-        Header: "Issue",
-        accessor: "issueDesc",
-        maxWidth: 200
+        Header: "Received",
+        columns: [
+          {
+            Header: "Staff",
+            accessor: "receivedStaff",
+          },
+          {
+            Header: "Date",
+            accessor: "receivedDate",
+          }
+        ]
       },
       {
-        Header: "Accessories",
-        accessor: "accessories",
-        maxWidth: 80
+        Header: "Quoted",
+        columns: [
+          {
+            Header: "Staff",
+            accessor: "quoteStaff",
+          },
+          {
+            Header: "Price",
+            accessor: "quotePrice",
+          }
+        ]
       },
       {
-        Header: "Receiver",
-        accessor: "receivedStaff",
-        maxWidth: 80
+        Header: "Status",
+        columns: [
+          {
+            Header: "Instore?",
+            accessor: "instore",
+            minWidth: 60
+          },
+          {
+            Header: "Confirmed?",
+            accessor: "confirmed",
+            minWidth: 80
+          },
+          {
+            Header: "Fixed?",
+            accessor: "fixed",
+            minWidth: 50
+          }
+        ]
       },
       {
-        Header: "Received Date",
-        accessor: "receivedDate",
-        maxWidth: 100
-      },
-      {
-        Header: "Quoted By",
-        accessor: "quoteStaff",
-        width: 80
-      },
-      {
-        Header: "Quoted Price",
-        accessor: "quoteDate",
-        width: 90
-      },
-      {
-        Header: "Instore?",
-        accessor: "instore",
-        width: 70
-      },
-      {
-        Header: "Confirmed?",
-        accessor: "confirmed",
-        width: 80
-      },
-      {
-        Header: "Fixed?",
-        accessor: "fixed",
-        width: 50
-      },
-      {
-        Header: "Fullfilled By",
-        accessor: "fullfilledStaff",
-        width: 80
-      },
-      {
-        Header: "Fullfilled Date",
-        accessor: "fullfilledDate",
-        width: 100
+        Header: "Fullfilled",
+        columns: [
+          {
+            Header: "Staff",
+            accessor: "fullfilledStaff",
+          },
+          {
+            Header: "Fullfilled Date",
+            accessor: "Date",
+          }
+        ]
       }
     ];
     return (
