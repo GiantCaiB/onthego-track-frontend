@@ -19,7 +19,6 @@ class HomePage extends React.Component {
     return (
       <div className="homeBoard">
         <div className="col-md-6 col-md-offset-3">
-          <h3>Hi {user.username}!</h3>
           <p>
             <Link to="/login">Logout</Link>
           </p>
