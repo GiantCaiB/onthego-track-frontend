@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 
 import { jobActions } from "../_actions";
 
-import JobBoard from "./JobBoard";
+import { JobBoard } from "./JobBoard";
 
 class HomePage extends React.Component {
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     const { user } = this.props;
@@ -17,6 +17,7 @@ class HomePage extends React.Component {
       <div className="homeBoard">
         <div className="col-md-6 col-md-offset-3">
           <h3>Hi {user.username}!</h3>
+          <JobBoard />
           <p>
             <Link to="/login">Logout</Link>
           </p>
