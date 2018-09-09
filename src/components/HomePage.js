@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { JobBoard } from "./JobBoard";
+import AddingForm from "./AddingForm";
 import { Modal, Button } from "antd";
 
 class HomePage extends React.Component {
@@ -12,7 +13,7 @@ class HomePage extends React.Component {
     addingFormVisible: false,
     searchFormVisible: false
   };
-  componentDidMount() {}
+  componentDidMount() { }
 
   showAddingForm = () => {
     this.setState({
@@ -26,6 +27,24 @@ class HomePage extends React.Component {
     });
   };
 
+  handleAddingSubmit = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      console.log("Received values of form: ", values);
+      form.resetFields();
+      this.setState({
+        addingFormVisible: false
+      });
+    });
+  };
+
+  saveFormRef = formRef => {
+    this.formRef = formRef;
+  };
+
   handleCancel = () => {
     this.setState({
       addingFormVisible: false,
@@ -35,15 +54,19 @@ class HomePage extends React.Component {
 
   render() {
     const { user } = this.props;
-    const { addingFormVisible, searchFormVisible} = this.state;
+    const { addingFormVisible, searchFormVisible } = this.state;
     return (
       <div className="homeBoard">
         <div className="col-md-6 col-md-offset-3">
           <div className="controlPanel">
             <h4>Hi {user.username}.</h4>
             <div>
-              <Button icon="plus" onClick={this.showAddingForm}>Add</Button>
-              <Button icon="search" onClick={this.showSearchForm}>Search</Button>
+              <Button icon="plus" onClick={this.showAddingForm}>
+                Add
+              </Button>
+              <Button icon="search" onClick={this.showSearchForm}>
+                Search
+              </Button>
               <Link to="/login">
                 <Button type="danger" icon="close">
                   Logout
@@ -51,20 +74,19 @@ class HomePage extends React.Component {
               </Link>
             </div>
             <div>
-            <Modal
-              title="Adding A Record"
-              visible={addingFormVisible}
-              onCancel={this.handleCancel}
-            >
-              <p>This will be a form for adding new jobs</p>
-            </Modal>
-            <Modal
-              title="Search "
-              visible={searchFormVisible}
-              onCancel={this.handleCancel}
-            >
-              <p>This will be a form for searching</p>
-            </Modal>
+              <AddingForm
+                wrappedComponentRef={this.saveFormRef}
+                visible={addingFormVisible}
+                onCancel={this.handleCancel}
+                onCreate={this.handleAddingSubmit}
+              />
+              <Modal
+                title="Search "
+                visible={searchFormVisible}
+                onCancel={this.handleCancel}
+              >
+                <p>This will be a form for searching</p>
+              </Modal>
             </div>
           </div>
           <br />
