@@ -46,6 +46,8 @@ class HomePage extends React.Component {
   };
 
   handleCancel = () => {
+    const form = this.formRef.props.form;
+    form.resetFields();
     this.setState({
       addingFormVisible: false,
       searchFormVisible: false

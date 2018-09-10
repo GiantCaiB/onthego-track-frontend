@@ -1,12 +1,15 @@
 import { userConstants } from "../_constants";
 import { alertActions } from "./";
 import { history } from "../_helpers";
+import {authHeader} from "../_helpers";
 
 export const userActions = {
   login,
   logout,
-  handleResponse
+  getAll
 };
+
+let auth_header = authHeader();
 
 function login(username, password) {
   return async dispatch => {
@@ -37,6 +40,22 @@ function login(username, password) {
 function logout() {
   localStorage.removeItem("user");
   return { type: userConstants.LOGOUT };
+}
+
+function getAll() {
+  return async dispatch => {
+    try {
+      const getAllOptions = {
+        method: "GET",
+        headers: auth_header
+      };
+      const res = await fetch("https://onthego-track-backend.herokuapp.com/api/auth/getAll", getAllOptions);
+       return await handleResponse(res);
+    } catch (err) {
+      const msg = err.toString();
+      dispatch(alertActions.error(msg));
+    }
+  };
 }
 
 function handleResponse(res) {
