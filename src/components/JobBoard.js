@@ -12,7 +12,21 @@ class JobBoard extends React.Component {
     this.props.dispatch(jobActions.getAll());
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
+
+  booleanRender(value) {
+    if (value) {
+      return <div
+        style={{
+          color: "green"
+        }}>Yes</div>;
+    }
+    return <div
+      style={{
+        color: "red"
+      }}>No</div>;
+  }
+
   render() {
     const { jobs } = this.props;
     const columns = [
@@ -31,11 +45,11 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: " Name",
-            accessor: "customername",
+            accessor: "customername"
           },
           {
             Header: "Contact",
-            accessor: "contact",
+            accessor: "contact"
           }
         ]
       },
@@ -44,15 +58,15 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Model",
-            accessor: "deviceDesc",
+            accessor: "deviceDesc"
           },
           {
             Header: "Issue",
-            accessor: "issueDesc",
+            accessor: "issueDesc"
           },
           {
             Header: "Accessories",
-            accessor: "accessories",
+            accessor: "accessories"
           }
         ]
       },
@@ -61,11 +75,11 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Staff",
-            accessor: "receivedStaff",
+            accessor: "receivedStaff"
           },
           {
             Header: "Date",
-            accessor: "receivedDate",
+            accessor: "receivedDate"
           }
         ]
       },
@@ -74,11 +88,11 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Staff",
-            accessor: "quoteStaff",
+            accessor: "quoteStaff"
           },
           {
             Header: "Price",
-            accessor: "quotePrice",
+            accessor: "quotePrice"
           }
         ]
       },
@@ -88,17 +102,20 @@ class JobBoard extends React.Component {
           {
             Header: "Instore?",
             accessor: "instore",
-            minWidth: 60
+            minWidth: 60,
+            Cell: ({ value }) => this.booleanRender(value)
           },
           {
             Header: "Confirmed?",
             accessor: "confirmed",
-            minWidth: 80
+            minWidth: 80,
+            Cell: ({ value }) => this.booleanRender(value)
           },
           {
             Header: "Fixed?",
             accessor: "fixed",
-            minWidth: 50
+            minWidth: 50,
+            Cell: ({ value }) => this.booleanRender(value)
           }
         ]
       },
@@ -107,11 +124,11 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Staff",
-            accessor: "fullfilledStaff",
+            accessor: "fullfilledStaff"
           },
           {
             Header: "Fullfilled Date",
-            accessor: "Date",
+            accessor: "Date"
           }
         ]
       }
@@ -119,7 +136,18 @@ class JobBoard extends React.Component {
     return (
       <div className="jobBoard">
         <div className="grey lighten-5">
-          <ReactTable data={jobs} columns={columns} defaultPageSize={15}/>
+          <ReactTable
+            data={jobs}
+            columns={columns}
+            defaultPageSize={15}
+            getTrProps={(state, rowInfo, column, instance) => {
+              return {
+                onDoubleClick: (e) => {
+                  console.log("Selected ID: ", rowInfo.original.id);
+                }
+              };
+            }}
+          />
         </div>
       </div>
     );

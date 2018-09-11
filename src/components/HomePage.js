@@ -36,10 +36,8 @@ class HomePage extends React.Component {
       if (err) {
         return;
       }
-      (async function() {
-        await jobActions.create(values);
-        form.resetFields();
-      })();
+      jobActions.create(values);
+      form.resetFields();
       this.props.dispatch(jobActions.getAll());
       this.setState({
         confirmLoading: true
@@ -49,7 +47,7 @@ class HomePage extends React.Component {
           addingFormVisible: false,
           confirmLoading: false,
         });
-      }, 2000);
+      }, 2500);
     });
   };
 

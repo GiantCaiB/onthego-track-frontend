@@ -4,7 +4,8 @@ import { authHeader } from "../_helpers";
 
 export const jobActions = {
     create,
-    getAll
+    getAll,
+    getById
     //update,
     //delete: _delete
 };
@@ -48,6 +49,22 @@ function getAll() {
             dispatch(alertActions.error(msg));
         }
     };
+}
+
+async function getById(id){
+    try {
+        const getByIdOptions = {
+            method: "GET",
+            headers: auth_header
+        };
+        await fetch(
+            "https://onthego-track-backend.herokuapp.com/api/job/:id",
+            getByIdOptions
+        );
+    } catch (err) {
+        const msg = err.toString();
+        console.log(msg);
+    }
 }
 
 function handleResponse(res) {
