@@ -20,7 +20,7 @@ class JobBoard extends React.Component {
         return (
           <div
             style={{
-              color: "green"
+              color: "DarkGreen"
             }}
           >
             {"WG"}
@@ -30,7 +30,7 @@ class JobBoard extends React.Component {
         return (
           <div
             style={{
-              color: "blue"
+              color: "MediumBlue"
             }}
           >
             {"Glen"}
@@ -40,7 +40,7 @@ class JobBoard extends React.Component {
         return (
           <div
             style={{
-              color: "red"
+              color: "Crimson"
             }}
           >
             {"Chinatown"}
@@ -50,12 +50,14 @@ class JobBoard extends React.Component {
         return (
           <div
             style={{
-              color: "brown"
+              color: "OrangeRed"
             }}
           >
             {"Bourke"}
           </div>
         );
+      default:
+        return;
     }
   }
 
@@ -64,7 +66,7 @@ class JobBoard extends React.Component {
       return (
         <div
           style={{
-            color: "green"
+            color: "LimeGreen"
           }}
         >
           {"✔"}
@@ -74,7 +76,7 @@ class JobBoard extends React.Component {
     return (
       <div
         style={{
-          color: "red"
+          color: "Red"
         }}
       >
         {"✘"}

@@ -1,3 +1,4 @@
+import "../css/style.css";
 import "antd/dist/antd.css";
 import React from "react";
 import { Modal, Form, Input, Radio, DatePicker, Cascader } from "antd";
@@ -48,6 +49,7 @@ const AddingForm = Form.create()(
         }
       ];
       return (
+        <div className="addingForm">
         <Modal
           visible={visible}
           title="Add a new record"
@@ -221,6 +223,7 @@ const AddingForm = Form.create()(
             </FormItem>
           </Form>
         </Modal>
+        </div>
       );
     }
   }
