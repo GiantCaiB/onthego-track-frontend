@@ -187,7 +187,7 @@ class JobBoard extends React.Component {
           },
           {
             Header: "Fullfilled Date",
-            accessor: "Date",
+            accessor: "fullfilledDate",
             width: 90
           }
         ]
@@ -199,7 +199,7 @@ class JobBoard extends React.Component {
           <ReactTable
             data={jobs}
             columns={columns}
-            defaultPageSize={15}
+            defaultPageSize={16}
             getTrProps={(state, rowInfo, column, instance) => {
               return {
                 onDoubleClick: e => {
