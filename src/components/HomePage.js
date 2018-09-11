@@ -13,7 +13,8 @@ import { jobActions } from "../_actions";
 class HomePage extends React.Component {
   state = {
     addingFormVisible: false,
-    searchFormVisible: false
+    searchFormVisible: false,
+    confirmLoading: false
   };
   componentDidMount() {}
 
@@ -41,8 +42,14 @@ class HomePage extends React.Component {
       })();
       this.props.dispatch(jobActions.getAll());
       this.setState({
-        addingFormVisible: false
+        confirmLoading: true
       });
+      setTimeout(() => {
+        this.setState({
+          addingFormVisible: false,
+          confirmLoading: false,
+        });
+      }, 2000);
     });
   };
 
@@ -61,7 +68,7 @@ class HomePage extends React.Component {
 
   render() {
     const { user } = this.props;
-    const { addingFormVisible, searchFormVisible } = this.state;
+    const { addingFormVisible, searchFormVisible, confirmLoading } = this.state;
     return (
       <div className="homeBoard">
         <div className="col-md-6 col-md-offset-3">
@@ -86,6 +93,7 @@ class HomePage extends React.Component {
                 visible={addingFormVisible}
                 onCancel={this.handleCancel}
                 onCreate={this.handleAddingSubmit}
+                confirmLoading={confirmLoading}
               />
               <Modal
                 title="Search "

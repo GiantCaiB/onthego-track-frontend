@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 const AddingForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCancel, onCreate, form, confirmLoading } = this.props;
       const { getFieldDecorator } = form;
       const users = [
         {
@@ -54,6 +54,7 @@ const AddingForm = Form.create()(
           okText="Add"
           onCancel={onCancel}
           onOk={onCreate}
+          confirmLoading={confirmLoading}
         >
           <Form layout="vertical">
             <FormItem label="Store">
