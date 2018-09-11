@@ -14,9 +14,22 @@ class HomePage extends React.Component {
   state = {
     addingFormVisible: false,
     searchFormVisible: false,
-    confirmLoading: false
+    confirmLoading: false,
+    refreshLoading: false
   };
   componentDidMount() {}
+
+  reloadJobBoard = () => {
+    this.setState({
+      refreshLoading: true
+    });
+    this.props.dispatch(jobActions.getAll());
+    setTimeout(() => {
+      this.setState({
+        refreshLoading: false,
+      });
+    }, 800);
+  }
 
   showAddingForm = () => {
     this.setState({
@@ -66,13 +79,16 @@ class HomePage extends React.Component {
 
   render() {
     const { user } = this.props;
-    const { addingFormVisible, searchFormVisible, confirmLoading } = this.state;
+    const { addingFormVisible, searchFormVisible, confirmLoading, refreshLoading} = this.state;
     return (
       <div className="homeBoard">
         <div className="col-md-6 col-md-offset-3">
           <div className="controlPanel">
             <h4>Hi {user.username}.</h4>
             <div>
+              <Button icon="reload" onClick={this.reloadJobBoard} loading={refreshLoading}>
+                Refresh
+              </Button>
               <Button icon="plus" onClick={this.showAddingForm}>
                 Add
               </Button>

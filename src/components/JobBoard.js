@@ -118,7 +118,8 @@ class JobBoard extends React.Component {
           },
           {
             Header: "Issue",
-            accessor: "issueDesc"
+            accessor: "issueDesc",
+            width: 200
           },
           {
             Header: "Accessories",
@@ -146,7 +147,8 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Staff",
-            accessor: "quoteStaff"
+            accessor: "quoteStaff",
+            width: 70
           },
           {
             Header: "Price",
