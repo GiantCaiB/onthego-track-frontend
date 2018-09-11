@@ -12,19 +12,74 @@ class JobBoard extends React.Component {
     this.props.dispatch(jobActions.getAll());
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
+
+  storeRender(value) {
+    switch (value) {
+      case 1:
+        return (
+          <div
+            style={{
+              color: "green"
+            }}
+          >
+            {"WG"}
+          </div>
+        );
+      case 2:
+        return (
+          <div
+            style={{
+              color: "blue"
+            }}
+          >
+            {"Glen"}
+          </div>
+        );
+      case 3:
+        return (
+          <div
+            style={{
+              color: "red"
+            }}
+          >
+            {"Chinatown"}
+          </div>
+        );
+      case 4:
+        return (
+          <div
+            style={{
+              color: "brown"
+            }}
+          >
+            {"Bourke"}
+          </div>
+        );
+    }
+  }
 
   booleanRender(value) {
     if (value) {
-      return <div
-        style={{
-          color: "green"
-        }}>Yes</div>;
+      return (
+        <div
+          style={{
+            color: "green"
+          }}
+        >
+          {"✔"}
+        </div>
+      );
     }
-    return <div
-      style={{
-        color: "red"
-      }}>No</div>;
+    return (
+      <div
+        style={{
+          color: "red"
+        }}
+      >
+        {"✘"}
+      </div>
+    );
   }
 
   render() {
@@ -33,12 +88,13 @@ class JobBoard extends React.Component {
       {
         Header: "ID",
         accessor: "id",
-        width: 40
+        width: 25
       },
       {
         Header: "Store",
         accessor: "store",
-        width: 50
+        width: 70,
+        Cell: ({ value }) => this.storeRender(value)
       },
       {
         Header: "Customer",
@@ -75,11 +131,13 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Staff",
-            accessor: "receivedStaff"
+            accessor: "receivedStaff",
+            width: 70
           },
           {
             Header: "Date",
-            accessor: "receivedDate"
+            accessor: "receivedDate",
+            width: 90
           }
         ]
       },
@@ -124,11 +182,13 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Staff",
-            accessor: "fullfilledStaff"
+            accessor: "fullfilledStaff",
+            width: 70
           },
           {
             Header: "Fullfilled Date",
-            accessor: "Date"
+            accessor: "Date",
+            width: 90
           }
         ]
       }
@@ -142,7 +202,7 @@ class JobBoard extends React.Component {
             defaultPageSize={15}
             getTrProps={(state, rowInfo, column, instance) => {
               return {
-                onDoubleClick: (e) => {
+                onDoubleClick: e => {
                   console.log("Selected ID: ", rowInfo.original.id);
                 }
               };
