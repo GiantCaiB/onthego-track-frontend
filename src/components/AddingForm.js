@@ -49,7 +49,6 @@ const AddingForm = Form.create()(
         }
       ];
       return (
-        <div className="addingForm">
         <Modal
           visible={visible}
           title="Add a new record"
@@ -59,7 +58,11 @@ const AddingForm = Form.create()(
           confirmLoading={confirmLoading}
         >
           <Form>
-            <FormItem label="Store" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
+            <FormItem
+              label="Store"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 12 }}
+            >
               {getFieldDecorator("store", {
                 rules: [
                   {
@@ -76,7 +79,11 @@ const AddingForm = Form.create()(
                 </Radio.Group>
               )}
             </FormItem>
-            <FormItem label="Customer Name" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
+            <FormItem
+              label="Customer Name"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 12 }}
+            >
               {getFieldDecorator("customername", {
                 rules: [
                   {
@@ -86,7 +93,11 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Customer Contact" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
+            <FormItem
+              label="Customer Contact"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 12 }}
+            >
               {getFieldDecorator("contact", {
                 rules: [
                   {
@@ -96,7 +107,11 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Device Model" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
+            <FormItem
+              label="Device Model"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 12 }}
+            >
               {getFieldDecorator("deviceDesc", {
                 rules: [
                   {
@@ -106,7 +121,11 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Device Issue" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
+            <FormItem
+              label="Device Issue"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 12 }}
+            >
               {getFieldDecorator("issueDesc", {
                 rules: [
                   {
@@ -116,23 +135,35 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="With Accessoeries?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
+            <FormItem
+              label="With Accessoeries?"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 8 }}
+            >
               {getFieldDecorator("accessories", {
                 initialValue: ["N/A"]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Received By" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
+            <FormItem
+              label="Received By"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 6 }}
+            >
               {getFieldDecorator("receivedStaff", {
                 rules: [
                   {
-                    type: "array",  
+                    type: "array",
                     required: true,
                     message: "Please select the staff who received this device!"
                   }
                 ]
               })(<Cascader options={users} />)}
             </FormItem>
-            <FormItem label="Received Date" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
+            <FormItem
+              label="Received Date"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 6 }}
+            >
               {getFieldDecorator("receivedDate", {
                 rules: [
                   {
@@ -153,62 +184,89 @@ const AddingForm = Form.create()(
                 />
               )}
             </FormItem>
-            <FormItem label="Quoted By" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
+            <FormItem
+              label="Quoted By"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 6 }}
+            >
               {getFieldDecorator("quoteStaff", {
                 rules: [
                   {
-                    type: "array"                  }
-                ]
-              })(<Cascader options={users} />)}
-            </FormItem>
-            <FormItem label="Quoted Price" labelCol={{ span: 8 }} wrapperCol={{ span: 4 }}>
-              {getFieldDecorator("quotePrice", {})(<Input type="textarea" />)}
-            </FormItem>
-            <FormItem label="Instore?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
-              {getFieldDecorator("instore", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please indicate whether this device will be repaired within OnTheGo or sent away!"
-                    }
-                  ]
-              })(
-                <Radio.Group>
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </Radio.Group>
-              )}
-            </FormItem>
-            <FormItem label="Confirmed?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
-              {getFieldDecorator("confirmed", {
-              })(
-                <Radio.Group>
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </Radio.Group>
-              )}
-            </FormItem>
-            <FormItem label="Fixed?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
-              {getFieldDecorator("fixed", {
-              })(
-                <Radio.Group>
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </Radio.Group>
-              )}
-            </FormItem>
-            <FormItem label="Fullfilled By"  labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
-              {getFieldDecorator("fullfilledStaff", {
-                rules: [
-                  {
-                    type: "array",
+                    type: "array"
                   }
                 ]
               })(<Cascader options={users} />)}
             </FormItem>
-            <FormItem label="Fullfilled Date" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
-              {getFieldDecorator("fullfilledDate", {
+            <FormItem
+              label="Quoted Price"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 4 }}
+            >
+              {getFieldDecorator("quotePrice", {})(<Input type="textarea" />)}
+            </FormItem>
+            <FormItem
+              label="Instore?"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 8 }}
+            >
+              {getFieldDecorator("instore", {
+                rules: [
+                  {
+                    required: true,
+                    message:
+                      "Please indicate whether this device will be repaired within OnTheGo or sent away!"
+                  }
+                ]
               })(
+                <Radio.Group>
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </Radio.Group>
+              )}
+            </FormItem>
+            <FormItem
+              label="Confirmed?"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 8 }}
+            >
+              {getFieldDecorator("confirmed", {})(
+                <Radio.Group>
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </Radio.Group>
+              )}
+            </FormItem>
+            <FormItem
+              label="Fixed?"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 8 }}
+            >
+              {getFieldDecorator("fixed", {})(
+                <Radio.Group>
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </Radio.Group>
+              )}
+            </FormItem>
+            <FormItem
+              label="Fullfilled By"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 6 }}
+            >
+              {getFieldDecorator("fullfilledStaff", {
+                rules: [
+                  {
+                    type: "array"
+                  }
+                ]
+              })(<Cascader options={users} />)}
+            </FormItem>
+            <FormItem
+              label="Fullfilled Date"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 6 }}
+            >
+              {getFieldDecorator("fullfilledDate", {})(
                 <DatePicker
                   dateRender={current => {
                     const style = {};
@@ -223,7 +281,6 @@ const AddingForm = Form.create()(
             </FormItem>
           </Form>
         </Modal>
-        </div>
       );
     }
   }
