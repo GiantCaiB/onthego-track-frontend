@@ -18,7 +18,7 @@ class JobBoard extends React.Component {
     const columns = [
       {
         Header: "ID",
-        accessor: "jobID",
+        accessor: "id",
         width: 40
       },
       {
@@ -119,7 +119,7 @@ class JobBoard extends React.Component {
     return (
       <div className="jobBoard">
         <div className="grey lighten-5">
-          <ReactTable data={jobs} columns={columns} defaultPageSize="15"/>
+          <ReactTable data={jobs} columns={columns} defaultPageSize={15}/>
         </div>
       </div>
     );

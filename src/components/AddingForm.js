@@ -55,7 +55,7 @@ const AddingForm = Form.create()(
           onCancel={onCancel}
           onOk={onCreate}
         >
-          <Form layout="horizontal">
+          <Form layout="vertical">
             <FormItem label="Store">
               {getFieldDecorator("store", {
                 rules: [
@@ -122,7 +122,7 @@ const AddingForm = Form.create()(
               {getFieldDecorator("receivedStaff", {
                 rules: [
                   {
-                    type: "array",
+                    type: "array",  
                     required: true,
                     message: "Please select the staff who received this device!"
                   }

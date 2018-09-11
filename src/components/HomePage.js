@@ -8,12 +8,14 @@ import { JobBoard } from "./JobBoard";
 import AddingForm from "./AddingForm";
 import { Modal, Button } from "antd";
 
+import { jobActions } from "../_actions";
+
 class HomePage extends React.Component {
   state = {
     addingFormVisible: false,
     searchFormVisible: false
   };
-  componentDidMount() { }
+  componentDidMount() {}
 
   showAddingForm = () => {
     this.setState({
@@ -33,8 +35,11 @@ class HomePage extends React.Component {
       if (err) {
         return;
       }
-      console.log("Received values of form: ", values);
-      form.resetFields();
+      (async function() {
+        await jobActions.create(values);
+        form.resetFields();
+      })();
+      this.props.dispatch(jobActions.getAll());
       this.setState({
         addingFormVisible: false
       });
@@ -100,9 +105,11 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication } = state;
+  const { jobsInfo, authentication } = state;
+  const { jobs } = jobsInfo;
   const { user } = authentication;
   return {
+    jobs,
     user
   };
 }
