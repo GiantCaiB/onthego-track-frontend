@@ -58,8 +58,8 @@ const AddingForm = Form.create()(
           onOk={onCreate}
           confirmLoading={confirmLoading}
         >
-          <Form layout="vertical">
-            <FormItem label="Store">
+          <Form>
+            <FormItem label="Store" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
               {getFieldDecorator("store", {
                 rules: [
                   {
@@ -69,14 +69,14 @@ const AddingForm = Form.create()(
                 ]
               })(
                 <Radio.Group>
-                  <Radio value={1}>WG</Radio>
                   <Radio value={2}>Glen</Radio>
                   <Radio value={3}>Chinatown</Radio>
+                  <Radio value={1}>WG</Radio>
                   <Radio value={4}>Bourke</Radio>
                 </Radio.Group>
               )}
             </FormItem>
-            <FormItem label="Customer Name">
+            <FormItem label="Customer Name" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
               {getFieldDecorator("customername", {
                 rules: [
                   {
@@ -86,7 +86,7 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Customer Contact">
+            <FormItem label="Customer Contact" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
               {getFieldDecorator("contact", {
                 rules: [
                   {
@@ -96,7 +96,7 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Device Model">
+            <FormItem label="Device Model" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
               {getFieldDecorator("deviceDesc", {
                 rules: [
                   {
@@ -106,7 +106,7 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Device Issue">
+            <FormItem label="Device Issue" labelCol={{ span: 8 }} wrapperCol={{ span: 12 }}>
               {getFieldDecorator("issueDesc", {
                 rules: [
                   {
@@ -116,12 +116,12 @@ const AddingForm = Form.create()(
                 ]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="With Accessoeries?">
+            <FormItem label="With Accessoeries?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
               {getFieldDecorator("accessories", {
                 initialValue: ["N/A"]
               })(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Received By">
+            <FormItem label="Received By" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
               {getFieldDecorator("receivedStaff", {
                 rules: [
                   {
@@ -132,7 +132,7 @@ const AddingForm = Form.create()(
                 ]
               })(<Cascader options={users} />)}
             </FormItem>
-            <FormItem label="Received Date">
+            <FormItem label="Received Date" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
               {getFieldDecorator("receivedDate", {
                 rules: [
                   {
@@ -153,7 +153,7 @@ const AddingForm = Form.create()(
                 />
               )}
             </FormItem>
-            <FormItem label="Quoted By">
+            <FormItem label="Quoted By" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
               {getFieldDecorator("quoteStaff", {
                 rules: [
                   {
@@ -161,10 +161,10 @@ const AddingForm = Form.create()(
                 ]
               })(<Cascader options={users} />)}
             </FormItem>
-            <FormItem label="Quoted Price">
+            <FormItem label="Quoted Price" labelCol={{ span: 8 }} wrapperCol={{ span: 4 }}>
               {getFieldDecorator("quotePrice", {})(<Input type="textarea" />)}
             </FormItem>
-            <FormItem label="Instore?">
+            <FormItem label="Instore?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
               {getFieldDecorator("instore", {
                   rules: [
                     {
@@ -179,7 +179,7 @@ const AddingForm = Form.create()(
                 </Radio.Group>
               )}
             </FormItem>
-            <FormItem label="Confirmed?">
+            <FormItem label="Confirmed?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
               {getFieldDecorator("confirmed", {
               })(
                 <Radio.Group>
@@ -188,7 +188,7 @@ const AddingForm = Form.create()(
                 </Radio.Group>
               )}
             </FormItem>
-            <FormItem label="Fixed?">
+            <FormItem label="Fixed?" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
               {getFieldDecorator("fixed", {
               })(
                 <Radio.Group>
@@ -197,7 +197,7 @@ const AddingForm = Form.create()(
                 </Radio.Group>
               )}
             </FormItem>
-            <FormItem label="Fullfilled By">
+            <FormItem label="Fullfilled By"  labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
               {getFieldDecorator("fullfilledStaff", {
                 rules: [
                   {
@@ -206,7 +206,7 @@ const AddingForm = Form.create()(
                 ]
               })(<Cascader options={users} />)}
             </FormItem>
-            <FormItem label="Fullfilled Date">
+            <FormItem label="Fullfilled Date" labelCol={{ span: 8 }} wrapperCol={{ span: 6 }}>
               {getFieldDecorator("fullfilledDate", {
               })(
                 <DatePicker
