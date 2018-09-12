@@ -108,7 +108,7 @@ class HomePage extends React.Component {
       receivedDate: moment(rowInfo.receivedDate),
       receivedStaff: [rowInfo.receivedStaff],
       quoteStaff: [rowInfo.quoteStaff],
-      fullfilledDate:  moment(rowInfo.fullfilledDate),
+      fullfilledDate:  rowInfo.fullfilledDate===null?"":moment(rowInfo.fullfilledDate),
       fullfilledStaff: [rowInfo.fullfilledStaff],
       issueDesc: rowInfo.issueDesc,
       quotePrice: rowInfo.quotePrice,
