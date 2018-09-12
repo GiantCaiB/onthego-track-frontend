@@ -140,7 +140,7 @@ class JobBoard extends React.Component {
           {
             Header: "Date",
             accessor: "receivedDate",
-            width: 90
+            width: 100
           }
         ]
       },
