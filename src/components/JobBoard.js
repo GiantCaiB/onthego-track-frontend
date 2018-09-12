@@ -140,7 +140,7 @@ class JobBoard extends React.Component {
           {
             Header: "Date",
             accessor: "receivedDate",
-            width: 100
+            width: 95
           }
         ]
       },
@@ -207,7 +207,7 @@ class JobBoard extends React.Component {
             getTrProps={(state, rowInfo, column, instance) => {
               return {
                 onDoubleClick: e => {
-                  handleDoubleClick(rowInfo.original.id);
+                  handleDoubleClick(rowInfo.original);
                 }
               };
             }}

@@ -4,7 +4,7 @@ import { userService } from "./";
 export const jobService = {
   create,
   getAll,
-  getById
+  update
 };
 
 function create(job) {
@@ -31,14 +31,15 @@ function getAll() {
   ).then(userService.handleResponse);
 }
 
-function getById(id) {
+function update(job) {
   const requestOptions = {
-    method: "GET",
-    headers: authHeader()
+    method: "PUT",
+    headers: { ...authHeader(), "Content-Type": "application/json" },
+    body: JSON.stringify(job)
   };
 
   return fetch(
-    `https://onthego-track-backend.herokuapp.com/api/job/${id}`,
+    `https://onthego-track-backend.herokuapp.com/api/job/${job.id}`,
     requestOptions
   ).then(userService.handleResponse);
 }

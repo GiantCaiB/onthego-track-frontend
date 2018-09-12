@@ -7,18 +7,20 @@ import { connect } from "react-redux";
 import { JobBoard } from "./JobBoard";
 import JobForm from "./JobForm";
 import { Modal, Button } from "antd";
+import moment from "moment";
 
 import { jobActions } from "../_actions";
 
 class HomePage extends React.Component {
   state = {
-    addingFormVisible: false,
-    updatingFormVisible: false,
-    searchFormVisible: false,
+    formVisible: false,
+    updatingForm: false,
+    searchVisible: false,
     confirmLoading: false,
-    refreshLoading: false
+    refreshLoading: false,
+    selectedId: {}
   };
-  componentDidMount() {}
+  componentDidMount() { }
 
   reloadJobBoard = () => {
     this.setState({
@@ -32,63 +34,42 @@ class HomePage extends React.Component {
     }, 800);
   };
 
-  showAddingForm = () => {
+  showForm = () => {
     this.setState({
-      addingFormVisible: true
+      formVisible: true
     });
   };
 
-  showUpdatingForm = () => {
+  showSearch = () => {
     this.setState({
-      updatingFormVisible: true
+      searchVisible: true
     });
   };
 
-  showSearchForm = () => {
-    this.setState({
-      searchFormVisible: true
-    });
-  };
-
-  handleAddingSubmit = () => {
+  handleFormSubmit = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
         return;
       }
-      this.props.dispatch(jobActions.create(values));
-      form.resetFields();
-      this.props.dispatch(jobActions.getAll());
-      this.setState({
-        confirmLoading: true
-      });
-      setTimeout(() => {
-        this.setState({
-          addingFormVisible: false,
-          confirmLoading: false
-        });
-      }, 2500);
-    });
-  };
-
-  handleUpdatingSubmit = () => {
-    const form = this.formRef.props.form;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
+      if(!this.state.updatingForm){
+        this.props.dispatch(jobActions.create(values));
       }
-      //this.props.dispatch(jobActions.create(values));
+      else{
+        this.props.dispatch(jobActions.update({...values,id: this.state.selectedId}));
+      }
       form.resetFields();
-      //this.props.dispatch(jobActions.getAll());
       this.setState({
         confirmLoading: true
       });
       setTimeout(() => {
+        this.props.dispatch(jobActions.getAll());
         this.setState({
-          updatingFormVisible: false,
-          confirmLoading: false
+          formVisible: false,
+          confirmLoading: false,
+          updatingForm : false
         });
-      }, 2500);
+      }, 2200);
     });
   };
 
@@ -100,18 +81,46 @@ class HomePage extends React.Component {
     const form = this.formRef.props.form;
     form.resetFields();
     this.setState({
-      addingFormVisible: false,
-      updatingFormVisible: false,
-      searchFormVisible: false
+      formVisible: false,
+      searchVisible: false,
+      updatingForm : false
+    });
+  };
+
+  handleDoubleClick = (rowInfo) => {
+    const form = this.formRef.props.form;
+    this.setState({
+      selectedId: rowInfo.id
+    });
+    form.setFieldsValue({
+      store: rowInfo.store,
+      customername: rowInfo.customername,
+      contact: rowInfo.contact,
+      deviceDesc: rowInfo.deviceDesc,
+      receivedDate: moment(rowInfo.receivedDate),
+      receivedStaff: [rowInfo.receivedStaff],
+      quoteStaff: [rowInfo.quoteStaff],
+      fullfilledDate:  moment(rowInfo.fullfilledDate),
+      fullfilledStaff: [rowInfo.fullfilledStaff],
+      issueDesc: rowInfo.issueDesc,
+      quotePrice: rowInfo.quotePrice,
+      instore: rowInfo.instore,
+      accessories: rowInfo.accessories,
+      confirmed: rowInfo.confirmed,
+      fixed: rowInfo.fixed
+    });
+    this.setState({
+      updatingForm : true,
+      formVisible: true
     });
   };
 
   render() {
     const { user } = this.props;
     const {
-      addingFormVisible,
-      updatingFormVisible,
-      searchFormVisible,
+      formVisible,
+      searchVisible,
+      updatingForm,
       confirmLoading,
       refreshLoading
     } = this.state;
@@ -128,10 +137,10 @@ class HomePage extends React.Component {
               >
                 Refresh
               </Button>
-              <Button icon="plus" onClick={this.showAddingForm}>
+              <Button icon="plus" onClick={this.showForm}>
                 Add
               </Button>
-              <Button icon="search" onClick={this.showSearchForm}>
+              <Button icon="search" onClick={this.showSearch}>
                 Search
               </Button>
               <Link to="/login">
@@ -143,17 +152,17 @@ class HomePage extends React.Component {
             <div>
               <JobForm
                 wrappedComponentRef={this.saveFormRef}
-                visible={addingFormVisible}
-                formTitle="Adding a record"
-                okText="Add"
+                visible={formVisible}
+                formTitle={updatingForm?"Updating A Record":"Adding A New Record"}
+                okText={updatingForm?"Update":"Add"}
                 onCancel={this.handleCancel}
-                onCreate={this.handleAddingSubmit}
+                onCreate={this.handleFormSubmit}
                 confirmLoading={confirmLoading}
               />
-              
+
               <Modal
                 title="Search "
-                visible={searchFormVisible}
+                visible={searchVisible}
                 onCancel={this.handleCancel}
               >
                 <p>This will be a form for searching</p>
@@ -161,7 +170,7 @@ class HomePage extends React.Component {
             </div>
           </div>
           <br />
-          <JobBoard handleDoubleClick={this.showUpdatingForm} />
+          <JobBoard handleDoubleClick={this.handleDoubleClick} />
         </div>
       </div>
     );
