@@ -6,6 +6,7 @@ import { history } from "../_helpers";
 export const jobActions = {
   create,
   getAll,
+  getUndone,
   update
   //delete: _delete
 };
@@ -57,6 +58,32 @@ function getAll() {
   }
   function failure(error) {
     return { type: jobConstants.GET_ALL_FAILURE, error };
+  }
+}
+
+function getUndone() {
+  return dispatch => {
+    dispatch(request());
+
+    jobService
+      .getAll()
+      .then(
+        jobs => {
+          const filteredJobs = jobs.filter((job) => { return !job.fullfilledStaff && !job.fullfilledDate });
+          dispatch(success(filteredJobs))
+        },
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() {
+    return { type: jobConstants.GET_UNDONE_REQUEST };
+  }
+  function success(jobs) {
+    return { type: jobConstants.GET_UNDONE_SUCCESS, jobs };
+  }
+  function failure(error) {
+    return { type: jobConstants.GET_UNDONE_FAILURE, error };
   }
 }
 

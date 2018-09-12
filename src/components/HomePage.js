@@ -18,7 +18,8 @@ class HomePage extends React.Component {
     searchVisible: false,
     confirmLoading: false,
     refreshLoading: false,
-    selectedId: {}
+    selectedId: {},
+    showLean: true
   };
   componentDidMount() { }
 
@@ -26,7 +27,7 @@ class HomePage extends React.Component {
     this.setState({
       refreshLoading: true
     });
-    this.props.dispatch(jobActions.getAll());
+    this.state.showLean?(this.props.dispatch(jobActions.getUndone())):(this.props.dispatch(jobActions.getAll()));
     setTimeout(() => {
       this.setState({
         refreshLoading: false
@@ -38,6 +39,13 @@ class HomePage extends React.Component {
     this.setState({
       formVisible: true
     });
+  };
+
+  displayFilter = () => {
+    this.setState((prevState, props) => ({
+      showLean: !prevState.showLean
+    }));
+    this.state.showLean?(this.props.dispatch(jobActions.getAll())):(this.props.dispatch(jobActions.getUndone()));
   };
 
   showSearch = () => {
@@ -62,7 +70,7 @@ class HomePage extends React.Component {
         confirmLoading: true
       });
       setTimeout(() => {
-        this.props.dispatch(jobActions.getAll());
+        this.state.showLean?(this.props.dispatch(jobActions.getUndone())):(this.props.dispatch(jobActions.getAll()));
         form.resetFields();
         this.setState({
           formVisible: false,
@@ -122,7 +130,8 @@ class HomePage extends React.Component {
       searchVisible,
       updatingForm,
       confirmLoading,
-      refreshLoading
+      refreshLoading,
+      showLean
     } = this.state;
     return (
       <div className="homeBoard">
@@ -139,6 +148,9 @@ class HomePage extends React.Component {
               </Button>
               <Button icon="plus" onClick={this.showForm}>
                 Add
+              </Button>
+              <Button icon={showLean?"file-text":"file"} onClick={this.displayFilter}>
+                {showLean?"Display all records":"Show undone only"}
               </Button>
               <Button icon="search" onClick={this.showSearch}>
                 Search

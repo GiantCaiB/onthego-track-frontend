@@ -9,7 +9,7 @@ import ReactTable from "react-table";
 class JobBoard extends React.Component {
   constructor(props) {
     super(props);
-    this.props.dispatch(jobActions.getAll());
+    this.props.dispatch(jobActions.getUndone());
   }
 
   componentDidMount() {}

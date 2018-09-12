@@ -19,7 +19,22 @@ export function jobsInfo(state = initialState, action) {
       return {
         error: action.error
       };
-    
+
+
+    // Get_Undone Actions
+    case jobConstants.GET_UNDONE_REQUEST:
+      return {
+        state
+      };
+    case jobConstants.GET_UNDONE_SUCCESS:
+      return {
+        ...state,
+        jobs: action.jobs
+      };
+    case jobConstants.GET_UNDONE_FAILURE:
+      return {
+        error: action.error
+      };
     default:
       return state;
   }
