@@ -1,4 +1,5 @@
 import { userConstants } from "../_constants";
+import { userService } from "../_services";
 import { alertActions } from "./";
 import { history } from "../_helpers";
 
@@ -8,48 +9,33 @@ export const userActions = {
 };
 
 function login(username, password) {
-  return async dispatch => {
-    try {
-      const loginOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      };
-      const res = await fetch("https://onthego-track-backend.herokuapp.com/api/auth/login", loginOptions);
-      const user = await handleResponse(res);
-      dispatch({ type: userConstants.LOGIN_REQUEST, user });
-      // login successful if there's a jwt token in the response
-      if (user.token) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem("user", JSON.stringify(user));
+  return dispatch => {
+    dispatch(request({ username }));
+
+    userService.login(username, password).then(
+      user => {
+        dispatch(success(user));
+        history.push("/");
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
       }
-      dispatch({ type: userConstants.LOGIN_SUCCESS, user });
-      history.push("/");
-    } catch (err) {
-      const msg = err.toString();
-      dispatch({ type: userConstants.LOGIN_FAILURE, msg });
-      dispatch(alertActions.error(msg));
-    }
+    );
   };
+
+  function request(user) {
+    return { type: userConstants.LOGIN_REQUEST, user };
+  }
+  function success(user) {
+    return { type: userConstants.LOGIN_SUCCESS, user };
+  }
+  function failure(error) {
+    return { type: userConstants.LOGIN_FAILURE, error };
+  }
 }
 
 function logout() {
-  localStorage.removeItem("user");
+  userService.logout();
   return { type: userConstants.LOGOUT };
-}
-
-function handleResponse(res) {
-  return res.text().then(text => {
-    const data = text && JSON.parse(text);
-    if (!res.ok) {
-      if (res.status === 401) {
-        // auto logout if 401 response returned from api
-        logout();
-        window.location.reload(true);
-      }
-      const err = (data && data.message) || res.statusText;
-      return Promise.reject(err);
-    }
-    return data;
-  });
 }

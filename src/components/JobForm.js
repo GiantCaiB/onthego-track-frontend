@@ -5,10 +5,10 @@ import { Modal, Form, Input, Radio, DatePicker, Cascader } from "antd";
 
 const FormItem = Form.Item;
 
-const AddingForm = Form.create()(
+const JobForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form, confirmLoading } = this.props;
+      const { visible,formTitle,okText, onCancel, onCreate, form, confirmLoading } = this.props;
       const { getFieldDecorator } = form;
       const users = [
         {
@@ -51,8 +51,8 @@ const AddingForm = Form.create()(
       return (
         <Modal
           visible={visible}
-          title="Add a new record"
-          okText="Add"
+          title={formTitle}
+          okText={okText}
           onCancel={onCancel}
           onOk={onCreate}
           confirmLoading={confirmLoading}
@@ -157,7 +157,7 @@ const AddingForm = Form.create()(
                     message: "Please select the staff who received this device!"
                   }
                 ]
-              })(<Cascader options={users} />)}
+              })(<Cascader options={users} placeholder={"Select a staff"}/>)}
             </FormItem>
             <FormItem
               label="Received Date"
@@ -195,7 +195,7 @@ const AddingForm = Form.create()(
                     type: "array"
                   }
                 ]
-              })(<Cascader options={users} />)}
+              })(<Cascader options={users} placeholder={"Select a staff"}/>)}
             </FormItem>
             <FormItem
               label="Quoted Price"
@@ -259,7 +259,7 @@ const AddingForm = Form.create()(
                     type: "array"
                   }
                 ]
-              })(<Cascader options={users} />)}
+              })(<Cascader options={users} placeholder={"Select a staff"}/>)}
             </FormItem>
             <FormItem
               label="Fullfilled Date"
@@ -286,4 +286,4 @@ const AddingForm = Form.create()(
   }
 );
 
-export default AddingForm;
+export default JobForm;

@@ -85,7 +85,7 @@ class JobBoard extends React.Component {
   }
 
   render() {
-    const { jobs } = this.props;
+    const { jobs, handleDoubleClick } = this.props;
     const columns = [
       {
         Header: "ID",
@@ -207,7 +207,7 @@ class JobBoard extends React.Component {
             getTrProps={(state, rowInfo, column, instance) => {
               return {
                 onDoubleClick: e => {
-                  console.log("Selected ID: ", rowInfo.original.id);
+                  handleDoubleClick(rowInfo.original.id);
                 }
               };
             }}

@@ -1,84 +1,67 @@
 import { jobConstants } from "../_constants";
+import { jobService } from '../_services';
 import { alertActions } from "./";
-import { authHeader } from "../_helpers";
+import { history } from '../_helpers';
 
 export const jobActions = {
-    create,
-    getAll,
-    getById
-    //update,
-    //delete: _delete
+  create,
+  getAll,
+  getById
+  //update,
+  //delete: _delete
 };
 
-let auth_header = authHeader();
+function create(job) {
+  return dispatch => {
+    dispatch(request(job));
 
-async function create(options) {
-    try {
-        const createOptions = {
-            method: "POST",
-            headers: Object.assign({ "Content-Type": "application/json" }, auth_header),
-            body: JSON.stringify(options)
-        };
-        await fetch(
-            "https://onthego-track-backend.herokuapp.com/api/job/create",
-            createOptions
-        );
-    } catch (err) {
-        const msg = err.toString();
-        console.log(msg);
-    }
+    jobService.create(job)
+      .then(
+        job => {
+          dispatch(success());
+          history.push('/');
+        },
+        error => {
+          dispatch(failure(error.toString()));
+          dispatch(alertActions.error(error.toString()));
+        }
+      );
+  };
+
+  function request(job) { return { type: jobConstants.CREATE_REQUEST, job } }
+  function success(job) { return { type: jobConstants.CREATE_SUCCESS, job } }
+  function failure(error) { return { type: jobConstants.CREATE_FAILURE, error } }
+
 }
 
 function getAll() {
-    return async dispatch => {
-        try {
-            const getAllOptions = {
-                method: "GET",
-                headers: auth_header
-            };
-            const res = await fetch(
-                "https://onthego-track-backend.herokuapp.com/api/job/",
-                getAllOptions
-            );
-            const jobs = await handleResponse(res);
-            dispatch({ type: jobConstants.GET_ALL_SUCCESS, jobs });
-            // TODO
-        } catch (err) {
-            const msg = err.toString();
-            dispatch({ type: jobConstants.GET_ALL_FAILURE, msg });
-            dispatch(alertActions.error(msg));
-        }
-    };
+  return dispatch => {
+    dispatch(request());
+
+    jobService.getAll()
+      .then(
+        jobs => dispatch(success(jobs)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request() { return { type: jobConstants.GET_ALL_REQUEST } }
+  function success(jobs) { return { type: jobConstants.GET_ALL_SUCCESS, jobs } }
+  function failure(error) { return { type: jobConstants.GET_ALL_FAILURE, error } }
 }
 
-async function getById(id){
-    try {
-        const getByIdOptions = {
-            method: "GET",
-            headers: auth_header
-        };
-        await fetch(
-            "https://onthego-track-backend.herokuapp.com/api/job/:id",
-            getByIdOptions
-        );
-    } catch (err) {
-        const msg = err.toString();
-        console.log(msg);
-    }
-}
+function getById(id) {
+  return dispatch => {
+    dispatch(request());
 
-function handleResponse(res) {
-    return res.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!res.ok) {
-            if (res.status === 401) {
-                // auto logout if 401 response returned from api
-                //logout();
-                window.location.reload(true);
-            }
-            const err = (data && data.message) || res.statusText;
-            return Promise.reject(err);
-        }
-        return data;
-    });
+    jobService.getById(id)
+      .then(
+        job => dispatch(success(job)),
+        error => dispatch(failure(error.toString()))
+      );
+  };
+
+  function request(id) { return { type: jobConstants.SELECT_BY_ID_REQUEST, id } }
+  function success(job) { return { type: jobConstants.SELECT_BY_ID_SUCCESS, job } }
+  function failure(error) { return { type: jobConstants.SELECT_BY_ID_FAILURE, error } }
 }
