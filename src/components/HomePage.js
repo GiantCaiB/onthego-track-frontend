@@ -58,12 +58,12 @@ class HomePage extends React.Component {
       else{
         this.props.dispatch(jobActions.update({...values,id: this.state.selectedId}));
       }
-      form.resetFields();
       this.setState({
         confirmLoading: true
       });
       setTimeout(() => {
         this.props.dispatch(jobActions.getAll());
+        form.resetFields();
         this.setState({
           formVisible: false,
           confirmLoading: false,
