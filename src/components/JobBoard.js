@@ -116,16 +116,27 @@ class JobBoard extends React.Component {
         columns: [
           {
             Header: "Model",
-            accessor: "deviceDesc"
+            accessor: "deviceDesc",
+            style: {
+              "white-space": "unset"
+            }
           },
           {
             Header: "Issue",
             accessor: "issueDesc",
-            width: 200
+            width: 200,
+            style: {
+              height: 120,
+              "white-space": "unset"
+            }
           },
           {
             Header: "Accessories",
-            accessor: "accessories"
+            accessor: "accessories",
+            maxWidth: 90,
+            style: {
+              "white-space": "unset"
+            }
           }
         ]
       },
@@ -190,9 +201,9 @@ class JobBoard extends React.Component {
             width: 70
           },
           {
-            Header: "Fullfilled Date",
+            Header: "Date",
             accessor: "fullfilledDate",
-            width: 90
+            width: 70
           }
         ]
       }
@@ -203,7 +214,7 @@ class JobBoard extends React.Component {
           <ReactTable
             data={jobs}
             columns={columns}
-            defaultPageSize={16}
+            defaultPageSize={10}
             getTrProps={(state, rowInfo, column, instance) => {
               return {
                 onDoubleClick: e => {
